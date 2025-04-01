@@ -1,0 +1,21 @@
+local players = game:GetService("Players")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local player = players.LocalPlayer
+
+local function getProperty(owner)
+    for _, property in next, workspace.Properties:GetChildren() do
+        if property.Owner.Value == owner then
+            return property
+        end
+    end
+end
+
+local function dupe()
+    local property = getProperty(player)
+    if not property then
+        return
+    end
+    replicatedStorage.Interaction.DestroyStructure:FireServer(property)
+end
+
+dupe()
